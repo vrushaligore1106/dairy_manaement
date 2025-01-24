@@ -1,0 +1,116 @@
+<!-- String updateQuery = "UPDATE stock SET qty = qty - qty WHERE stock = stock";
+pstmt = conn.prepareStatement(updateQuery);
+ 
+ int rowsAffected = pstmt.executeUpdate();
+
+ if (rowsAffected > 0) {
+    out.println("Stock updated successfully.");
+ } else {
+    out.println("Stock not found or already sold.");
+ } -->
+
+
+
+
+
+
+
+ if(typee.equalsIgnoreCase("cow"))
+ { 
+int currentQuantity=0;
+    PreparedStatement st=conn.prepareStatement("SELECT * FROM  cow");
+
+
+    ResultSet   resultSet = st.executeQuery();
+    if(resultSet.next()){
+        currentQuantity = resultSet.getInt("qty");
+    }
+     
+ 
+// Update the stock quantity
+currentQuantity += qty;
+
+  
+    String updateQuery = "UPDATE stockss SET qty = qty WHERE typee = typee ";
+    PreparedStatement updateStmt = conn.prepareStatement(updateQuery);
+    updateStmt.executeUpdate();
+  
+    updateStmt.close();
+    conn.close();
+     
+ }
+ if(typee.equalsIgnoreCase("buffalo")){
+    int currentQuantity=0;
+    PreparedStatement st=conn.prepareStatement("SELECT * FROM  cow");
+
+
+    ResultSet   resultSet = st.executeQuery();
+    if(resultSet.next()){
+        currentQuantity = resultSet.getInt("qty");
+    }
+     
+ 
+// Update the stock quantity
+currentQuantity += qty;
+
+    String updateQuery = "UPDATE stockss SET qty =  qty WHERE typee=typee ";
+    PreparedStatement updateStmt = conn.prepareStatement(updateQuery);
+    updateStmt.executeUpdate();
+  
+    updateStmt.close();
+    conn.close();
+   
+  }
+  
+ 
+ /////////////////////////////////
+
+ int currentQuantity=0;
+    PreparedStatement st=conn.prepareStatement("SELECT qty FROM stockss WHERE typee = typee");
+
+
+    ResultSet   resultSet = st.executeQuery();
+    if(resultSet.next()){
+        currentQuantity = resultSet.getInt("qty");
+      
+     
+      
+     
+    }
+    int updatedQuantity = currentQuantity + qty;
+    out.print(updatedQuantity);
+    
+    String updateQuery = "UPDATE stockss SET qty=?    WHERE typee = typee ";
+    PreparedStatement updateStmt = conn.prepareStatement(updateQuery);
+    pstmtUpdate.setString(1, typee);
+      pstmtUpdate.setInt(2, updatedQuantity);
+       
+      int rowsUpdated = pstmtUpdate.executeUpdate();
+ 
+    
+    updateStmt.close();
+    conn.close();
+     
+     
+ 
+ ////////////////
+ <%
+    // Create a connection to the database
+     Class.forName("com.mysql.jdbc.Driver");
+ Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/projectdb", "root", "nilange@12345");
+
+
+    // Retrieve the subtotal by summing up all the totals
+    Statement stmt = conn.createStatement();
+    ResultSet rs = stmt.executeQuery("SELECT SUM(total) AS subtotal FROM purchase_orders");
+    double subtotal = 0.0;
+    if (rs.next()) {
+      subtotal = rs.getDouble("subtotal");
+    }
+    rs.close();
+    stmt.close();
+    conn.close();
+  %>
+  
+  <!-- <h2>Subtotal: <%= subtotal %></h2> -->
+ 
